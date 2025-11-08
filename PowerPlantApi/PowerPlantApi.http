@@ -1,0 +1,6 @@
+@PowerPlantApi_HostAddress = http://localhost:5214
+
+GET {{PowerPlantApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
