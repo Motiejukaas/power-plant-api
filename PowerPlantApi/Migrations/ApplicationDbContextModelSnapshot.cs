@@ -32,9 +32,11 @@ namespace PowerPlantApi.Migrations
 
                     b.Property<string>("Owner")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .UseCollation("Latin1_General_100_CI_AI");
 
                     b.Property<decimal>("Power")
+                        .HasPrecision(18, 1)
                         .HasColumnType("decimal(18,1)");
 
                     b.Property<DateOnly>("ValidFrom")
@@ -45,7 +47,7 @@ namespace PowerPlantApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PowerPlants");
+                    b.ToTable("PowerPlants", (string)null);
                 });
 #pragma warning restore 612, 618
         }
