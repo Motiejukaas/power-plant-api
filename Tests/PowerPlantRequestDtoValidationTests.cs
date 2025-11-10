@@ -44,7 +44,20 @@ public class PowerPlantRequestDtoValidationTests
             ValidFrom = new DateOnly(2025, 11, 10)
         };
         var results = Validate(dto);
-        Assert.Contains(results, r => r.ErrorMessage == "Owner must consist of two words (text-only characters).");
+        Assert.Contains(results, r => r.ErrorMessage == "Owner must consist of two words (text-only characters) separated by a space.");
+    }
+    
+    [Fact]
+    public void Owner_TwoWordsWithMultipleWhitespaces_FailsTwoWordsRule()
+    {
+        var dto = new PowerPlantRequestDto
+        {
+            Owner = "Jonas      Jonaitis",
+            Power = 10,
+            ValidFrom = new DateOnly(2025, 11, 10)
+        };
+        var results = Validate(dto);
+        Assert.Contains(results, r => r.ErrorMessage == "Owner must consist of two words (text-only characters) separated by a space.");
     }
 
     [Fact]

@@ -20,7 +20,7 @@ public class PowerPlantController : ControllerBase
     {
         var powerPlants = await _powerPlantService.GetAllAsync(owner, pageNumber, pageSize);
         
-        return Ok(powerPlants);
+        return Ok(new { powerPlants });
     }
 
     [HttpPost]
@@ -31,6 +31,6 @@ public class PowerPlantController : ControllerBase
             return BadRequest(ModelState);
         }
         var createdPowerPlant = await _powerPlantService.CreateAsync(powerPlantRequestDto);
-        return Created("api/PowerPlant/" + createdPowerPlant.Id, createdPowerPlant);
+        return Created("api/PowerPlant/", createdPowerPlant);
     }
 }

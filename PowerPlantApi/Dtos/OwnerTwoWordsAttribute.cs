@@ -9,7 +9,7 @@ public sealed class OwnerTwoWordsAttribute : ValidationAttribute
 
     public string GetRequiredErrorMessage() => "Owner must not be empty or whitespace.";
 
-    public string GetTwoWordsErrorMessage() => "Owner must consist of two words (text-only characters).";
+    public string GetTwoWordsErrorMessage() => "Owner must consist of two words (text-only characters) separated by a space.";
     
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {

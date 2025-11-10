@@ -29,7 +29,7 @@ public class PowerPlantService : IPowerPlantService
     {
         return new PowerPlantResponseDto
         {
-            Id = entity.Id,
+            //Id = entity.Id,
             Owner = entity.Owner,
             Power = entity.Power,
             ValidFrom = entity.ValidFrom,
