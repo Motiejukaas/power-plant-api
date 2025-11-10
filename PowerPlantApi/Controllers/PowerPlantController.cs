@@ -15,9 +15,9 @@ public class PowerPlantController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] string ?owner = null)
+    public async Task<IActionResult> GetAll([FromQuery] string ?owner = null, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 5)
     {
-        var powerPlants = await _powerPlantService.GetAllAsync(owner);
+        var powerPlants = await _powerPlantService.GetAllAsync(owner, pageNumber, pageSize);
         
         return Ok(powerPlants);
     }

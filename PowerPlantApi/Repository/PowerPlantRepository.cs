@@ -16,7 +16,7 @@ public class PowerPlantRepository : IPowerPlantRepository
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<PowerPlant>> GetAllAsync(string? owner = null)
+    public async Task<IEnumerable<PowerPlant>> GetAllAsync(string? owner = null, int pageNumber = 1, int pageSize = 5)
     {
         IQueryable<PowerPlant> query = _dbContext.PowerPlants.AsNoTracking();
 
@@ -25,7 +25,9 @@ public class PowerPlantRepository : IPowerPlantRepository
             var pattern = $"%{owner}%";
             query = query.Where(p => EF.Functions.Like(p.Owner, pattern));
         }
-
-        return await query.ToListAsync();
+        
+        var skipNumber = (pageNumber - 1) * pageSize;
+        
+        return await query.Skip(skipNumber).Take(pageSize).ToListAsync();
     }
 }

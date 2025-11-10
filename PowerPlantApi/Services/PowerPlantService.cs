@@ -13,9 +13,9 @@ public class PowerPlantService : IPowerPlantService
         _powerPlantRepository = powerPlantRepository;
     }
 
-    public async Task<IEnumerable<PowerPlantResponseDto>> GetAllAsync(string? owner = null)
+    public async Task<IEnumerable<PowerPlantResponseDto>> GetAllAsync(string? owner = null, int pageNumber = 1, int pageSize = 5)
     {
-        var powerPlants = await _powerPlantRepository.GetAllAsync(owner);
+        var powerPlants = await _powerPlantRepository.GetAllAsync(owner, pageNumber, pageSize);
         return powerPlants.Select(EntityToDto);
     }
 
