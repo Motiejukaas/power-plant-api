@@ -7,7 +7,7 @@ public sealed class OwnerTwoWordsAttribute : ValidationAttribute
 {
     private static readonly Regex Pattern = new(@"^[A-Za-zÀ-ž]+(?:\s+[A-Za-zÀ-ž]+)$", RegexOptions.Compiled);
 
-    public string GetRequiredErrorMessage() => "Owner must not be empty or null.";
+    public string GetRequiredErrorMessage() => "Owner must not be empty or whitespace.";
 
     public string GetTwoWordsErrorMessage() => "Owner must consist of two words (text-only characters).";
     
