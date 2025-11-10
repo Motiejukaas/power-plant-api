@@ -30,4 +30,11 @@ public class PowerPlantRepository : IPowerPlantRepository
         
         return await query.Skip(skipNumber).Take(pageSize).ToListAsync();
     }
+
+    public async Task<PowerPlant> CreateAsync(PowerPlant powerPlant)
+    {
+        await _dbContext.PowerPlants.AddAsync(powerPlant);
+        await _dbContext.SaveChangesAsync();
+        return  powerPlant;
+    }
 }

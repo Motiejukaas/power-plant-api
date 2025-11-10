@@ -19,6 +19,12 @@ public class PowerPlantService : IPowerPlantService
         return powerPlants.Select(EntityToDto);
     }
 
+    public async Task<PowerPlantResponseDto> CreateAsync(PowerPlantRequestDto powerPlantRequestDto)
+    {
+        var createdPowerPlant = await _powerPlantRepository.CreateAsync(DtoToEntity(powerPlantRequestDto));
+        return EntityToDto(createdPowerPlant);
+    }
+
     private static PowerPlantResponseDto EntityToDto(PowerPlant entity)
     {
         return new PowerPlantResponseDto
@@ -28,6 +34,17 @@ public class PowerPlantService : IPowerPlantService
             Power = entity.Power,
             ValidFrom = entity.ValidFrom,
             ValidTo = entity.ValidTo
+        };
+    }
+
+    private static PowerPlant DtoToEntity(PowerPlantRequestDto dto)
+    {
+        return new PowerPlant
+        {
+            Owner = dto.Owner,
+            Power = dto.Power,
+            ValidFrom = dto.ValidFrom,
+            ValidTo = dto.ValidTo
         };
     }
 }
