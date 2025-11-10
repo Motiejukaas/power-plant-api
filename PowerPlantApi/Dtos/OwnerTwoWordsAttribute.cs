@@ -5,7 +5,7 @@ namespace PowerPlantApi.Dtos;
 
 public sealed class OwnerTwoWordsAttribute : ValidationAttribute
 {
-    private static readonly Regex Pattern = new(@"^[A-Za-zÀ-ž]+(?:\s+[A-Za-zÀ-ž]+)$", RegexOptions.Compiled);
+    private static readonly Regex Pattern = new(@"^[A-Za-zÀ-ž]+ [A-Za-zÀ-ž]+$", RegexOptions.Compiled);
 
     public string GetRequiredErrorMessage() => "Owner must not be empty or whitespace.";
 
