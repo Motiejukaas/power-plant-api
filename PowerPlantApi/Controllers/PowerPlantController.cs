@@ -19,17 +19,12 @@ public class PowerPlantController : ControllerBase
     public async Task<IActionResult> GetAllPowerPlants([FromQuery] List<string>? owner = null, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 5)
     {
         var powerPlants = await _powerPlantService.GetAllAsync(owner, pageNumber, pageSize);
-        
         return Ok(new { powerPlants });
     }
 
     [HttpPost]
     public async Task<IActionResult> CreatePowerPlant([FromBody] PowerPlantRequestDto powerPlantRequestDto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
         var createdPowerPlant = await _powerPlantService.CreateAsync(powerPlantRequestDto);
         return Created("api/PowerPlant/", createdPowerPlant);
     }
