@@ -14,14 +14,20 @@ public class PowerPlantRepository : IPowerPlantRepository
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<PowerPlant>> GetAllAsync(string? owner = null, int pageNumber = 1, int pageSize = 5)
+    public async Task<IEnumerable<PowerPlant>> GetAllAsync(List<string>? owner = null, int pageNumber = 1, int pageSize = 5)
     {
         IQueryable<PowerPlant> query = _dbContext.PowerPlants.AsNoTracking();
 
-        if (!string.IsNullOrWhiteSpace(owner))
+        if (owner is not null)
         {
-            var pattern = $"%{owner}%";
-            query = query.Where(p => EF.Functions.Like(p.Owner, pattern));
+            foreach (var ownerWord in owner)
+            {
+                if (!string.IsNullOrWhiteSpace(ownerWord))
+                {
+                    var pattern = $"%{ownerWord}%";
+                    query = query.Where(p => EF.Functions.Like(p.Owner, pattern));
+                }
+            }
         }
         
         var skipNumber = (pageNumber - 1) * pageSize;
