@@ -1,6 +1,4 @@
-using System.Text;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PowerPlantApi.Data;
 using PowerPlantApi.Interfaces;
 using PowerPlantApi.Models;
