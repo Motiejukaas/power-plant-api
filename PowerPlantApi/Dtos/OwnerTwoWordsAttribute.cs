@@ -7,10 +7,10 @@ public sealed class OwnerTwoWordsAttribute : ValidationAttribute
 {
     private static readonly Regex Pattern = new(@"^[A-Za-zÀ-ž]+ [A-Za-zÀ-ž]+$", RegexOptions.Compiled);
 
-    public string GetRequiredErrorMessage() => "Owner must not be empty or whitespace.";
+    public const string RequiredErrorMessage = "Owner must not be empty or whitespace.";
 
-    public string GetTwoWordsErrorMessage() => "Owner must consist of two words (text-only characters) separated by a space.";
-    
+    public const string TwoWordsErrorMessage = "Owner must consist of two words (text-only characters) separated by a space.";
+
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
         // to avoid having double error messages on null
@@ -22,9 +22,9 @@ public sealed class OwnerTwoWordsAttribute : ValidationAttribute
         var s = value as string;
         if (string.IsNullOrWhiteSpace(s))
         {
-            return new ValidationResult(GetRequiredErrorMessage());
+            return new ValidationResult(RequiredErrorMessage);
         }
         
-        return Pattern.IsMatch(s) ? ValidationResult.Success : new ValidationResult(GetTwoWordsErrorMessage());
+        return Pattern.IsMatch(s) ? ValidationResult.Success : new ValidationResult(TwoWordsErrorMessage);
     }
 }

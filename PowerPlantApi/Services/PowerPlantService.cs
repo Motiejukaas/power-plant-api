@@ -13,7 +13,7 @@ public class PowerPlantService : IPowerPlantService
         _powerPlantRepository = powerPlantRepository;
     }
 
-    public async Task<IEnumerable<PowerPlantResponseDto>> GetAllAsync(string? owner = null, int pageNumber = 1, int pageSize = 5)
+    public async Task<IEnumerable<PowerPlantResponseDto>> GetAllAsync(List<string>? owner = null, int pageNumber = 1, int pageSize = 5)
     {
         var powerPlants = await _powerPlantRepository.GetAllAsync(owner, pageNumber, pageSize);
         return powerPlants.Select(EntityToDto);
@@ -29,7 +29,6 @@ public class PowerPlantService : IPowerPlantService
     {
         return new PowerPlantResponseDto
         {
-            //Id = entity.Id,
             Owner = entity.Owner,
             Power = entity.Power,
             ValidFrom = entity.ValidFrom,
